@@ -17,6 +17,7 @@ ReactDOM.render(
     <Provider store={store}>
       <App />
     </Provider>
+    f
   </React.StrictMode>,
   document.getElementById("root")
 );
