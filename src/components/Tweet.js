@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { formatTweet, formatDate } from "../utils/helpers";
-
 import { TiHeart, TiHeartOutline, TiArrowBackOutline } from "react-icons/ti";
+
+import { formatTweet, formatDate } from "../utils/helpers";
 
 export default function Tweet({ id }) {
   const state = useSelector(({ authedUser, users, tweets }) => {

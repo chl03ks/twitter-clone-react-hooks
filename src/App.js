@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingBar from "react-redux-loading";
 
 import { handleInitialData } from "./actions/shared";
+
 import Dashboard from "./components/Dashboard";
-import LoadingBar from "react-redux-loading";
 
 function App() {
   const dispatch = useDispatch();
