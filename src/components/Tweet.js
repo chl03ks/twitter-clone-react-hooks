@@ -1,49 +1,38 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import useTweet from "../hooks/useTweet";
 import { TiHeart, TiHeartOutline, TiArrowBackOutline } from "react-icons/ti";
 
 import { handleToggleTweet } from "../actions/tweets";
-import { formatTweet, formatDate } from "../utils/helpers";
+import { formatDate } from "../utils/helpers";
 
-export default function Tweet({ id }) {
+export default function Tweet({ id: tweetId }) {
   const dispatch = useDispatch();
-
-  const state = useSelector(({ authedUser, users, tweets }) => {
-    const tweet = tweets[id];
-    const parent = tweet ? tweets[tweet.replyingTo] : null;
-    return {
-      authedUser,
-      tweet: tweet
-        ? formatTweet(tweet, users[tweet.author], authedUser, parent)
-        : null,
-    };
-  });
+  const { tweet, authedUser } = useTweet(tweetId);
 
   const toParent = () => {};
 
-  if (state.tweet === null) {
+  if (tweet === null) {
     return <div>This tweet doesn't exist</div>;
   }
 
   const {
-    name,
-    avatar,
-    timestamp,
+    id,
     text,
-    id: tweetId,
-    hasLiked,
+    name,
     likes,
-    replies,
     parent,
-  } = state.tweet;
-
-  const { authedUser } = state;
+    avatar,
+    replies,
+    hasLiked,
+    timestamp,
+  } = tweet;
 
   const handleLike = (e) => {
     e.preventDefault();
     dispatch(
       handleToggleTweet({
-        id: tweetId,
+        id,
         hasLiked,
         authedUser,
       })
