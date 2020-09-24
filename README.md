@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Redux Twiiter Clone Udacity But with Hooks
+
 
 ## Available Scripts
 
