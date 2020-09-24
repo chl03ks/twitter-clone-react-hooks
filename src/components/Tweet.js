@@ -1,16 +1,23 @@
 import React from "react";
+import { Link, useHistory } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
-import useTweet from "../hooks/useTweet";
 import { TiHeart, TiHeartOutline, TiArrowBackOutline } from "react-icons/ti";
 
+import useTweet from "../hooks/useTweet";
 import { handleToggleTweet } from "../actions/tweets";
 import { formatDate } from "../utils/helpers";
 
 export default function Tweet({ id: tweetId }) {
+  const history = useHistory();
   const dispatch = useDispatch();
+
   const { tweet, authedUser } = useTweet(tweetId);
 
-  const toParent = () => {};
+  const toParent = (e, id) => {
+    e.preventDefault();
+    history.push(`/tweet/${id}`);
+  };
 
   if (tweet === null) {
     return <div>This tweet doesn't exist</div>;
@@ -40,7 +47,7 @@ export default function Tweet({ id: tweetId }) {
   };
 
   return (
-    <div className="tweet">
+    <Link to={`/tweet/${id}`} className="tweet">
       <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
       <div className="tweet-info">
         <div>
@@ -69,6 +76,6 @@ export default function Tweet({ id: tweetId }) {
           <span>{likes !== 0 && likes}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
